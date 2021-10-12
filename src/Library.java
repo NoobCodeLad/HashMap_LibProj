@@ -84,25 +84,29 @@ public class Library
 
     public String getQuery(String booksInLibrary,String borrowedUsers,String query)
     {
-        switch (query) {
+        String[]queryparts = query.split(",");
+        String s01 = "";
+
+        switch (queryparts[0]) {
             case "1":
-                int id = Integer.parseInt(borrowedUsers);
+                int id = Integer.parseInt(queryparts[1]);
                 if (books.containsKey(id)) {
                     Library l1 = books.get(id);
-                    System.out.print("It is available\n"+l1.author+"\n");
+                    s01 = "It is available\n"+l1.author+"\n";
                 } else {
-                    System.out.print("No stock\nIt is owned by " + borrowers.get(id)+"\n");
+                    s01 = "No stock\nIt is owned by " + borrowers.get(id)+"\n";
                 }
 
                 break;
             case "2":
-                int uid = Integer.parseInt(borrowedUsers);
-                for (int i = 0;  i < ((borrowedUsers.length()) * 2);  i++) {
+                int uid = Integer.parseInt(queryparts[1]);      String temp;
+                for (int i = 0;  i < ((queryparts[1].length()) * 2);  i++) {
                     if (uid == borrow[i]) {
                         int bid = borrow[i + 1];
                         if (bookcopy.containsKey(bid)) {
                             Library l2 = bookcopy.get(bid);
-                            System.out.println(bid + " " + l2.bookName);
+                            temp = bid + " " + l2.bookName + "\n";
+                            s01 = temp + s01;
                         }
                     }
                 }
@@ -111,40 +115,40 @@ public class Library
                 int count1 = 0, count2 = 0;
                 for (Library x : books.values()) {
                     String s0 = x.bookName;
-                    if (s0.equalsIgnoreCase(borrowedUsers))
+                    if (s0.equalsIgnoreCase(queryparts[1]))
                         ++count1;
                 }
                 for (Library x : bookcopy.values()) {
                     String s0 = x.bookName;
-                    if (borrowedUsers.equalsIgnoreCase(s0))
+                    if (queryparts[1].equalsIgnoreCase(s0))
                         ++count2;
                 }
                 int bor = count2 - count1;
-                System.out.print(bor + " out\n" + count1 + " in\n");
+                s01 = bor + " out\n" + count1 + " in\n";
                 break;
             case "4":
                 for (Library x : bookcopy.values()) {
                     String s0 = x.bookName;
                     String s1 = x.author;
-                    if (s1.equals(borrowedUsers)) {
-                        System.out.println(s0);
+                    if (s1.equals(queryparts[1])) {
+                        s01=s01 + s0 + "\n";
                     }
                 }
                 break;
             case "5":
                 for (Library x : bookcopy.values()) {
                     String s0 = x.bookName;
-                    String s = borrowedUsers.toLowerCase();
+                    String s = queryparts[1].toLowerCase();
                     if (s0.toLowerCase().contains(s)) {
                         for (int i = 0;  i < ((bookcopy.size()) * 3);  i++) {
                             if (book[i].equalsIgnoreCase(s0))
-                                System.out.println(book[i-1] + " " + s0);
+                                s01 = s01 + (book[i-1] + " " + s0) + "\n";
                         }
                     }
                 }
                 break;
         }
-        return null;
+        return s01;
     }
 }
 

@@ -10,6 +10,7 @@ public class Maintest {
         Library l = new Library();
         l.createLibraryMap(booksInLibrary);
         l.createUserMap(borrowedUsers);
-        l.getQuery(booksInLibrary,"101","2");
+        String s = l.getQuery(booksInLibrary,borrowedUsers,"5,o");
+        System.out.print(s);
     }
 }
