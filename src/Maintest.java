@@ -8,9 +8,7 @@ public class Maintest {
                 "1006,Anand Math,Bankim Chandra Chatterjee";
         String borrowedUsers = "1006,101|1003,102|1001,101";
         Library l = new Library();
-        l.createLibraryMap(booksInLibrary);
-        l.createUserMap(borrowedUsers);
-        String s = l.getQuery(booksInLibrary,borrowedUsers,"5,o");
+        String s = l.getQuery(booksInLibrary,borrowedUsers,"5,Ad");
         System.out.print(s);
     }
 }

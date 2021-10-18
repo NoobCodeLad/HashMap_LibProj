@@ -84,6 +84,8 @@ public class Library
 
     public String getQuery(String booksInLibrary,String borrowedUsers,String query)
     {
+        createLibraryMap(booksInLibrary);
+        createUserMap(borrowedUsers);
         String[]queryparts = query.split(",");
         String s01 = "";
 
