@@ -150,6 +150,9 @@ public class Library
                 }
                 break;
         }
+        books.clear();
+        bookcopy.clear();
+        borrowers.clear();
         return s01;
     }
 }
